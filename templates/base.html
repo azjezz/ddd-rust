@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO Application</title>
+        {% block metadata %}
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% endblock %}
+        {% block style %}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/css/uikit.min.css"/>
+            <style>
+                .table-buttons {
+                    padding: 16px 4px !important;
+                }
+            </style>
+        {% endblock %}
+        {% block javascript %}
+            <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/js/uikit.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/js/uikit-icons.min.js"></script>
+        {% endblock %}
+    </head>
+    <body class="uk-light uk-background-secondary" uk-height-viewport="expand: true">
+        {% block body %}
+            <div class="uk-container uk-container-small uk-section">
+                <h4 class="uk-heading-line uk-text-bold">
+                    <span>TODO Application</span>
+                </h4>
+                {% block content %}{% endblock %}
+            </div>
+        {% endblock %}
+    </body>
+</html>
