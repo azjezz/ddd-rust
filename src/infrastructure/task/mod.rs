@@ -11,9 +11,10 @@ use crate::infrastructure::task::repository::PostgresTaskRepository;
 use postgres_es::PostgresCqrs;
 use sqlx::Pool;
 use sqlx::Postgres;
+use std::rc::Rc;
 use std::sync::Arc;
 
-type CQRSFramework = Arc<PostgresCqrs<Task>>;
+type CQRSFramework = Rc<PostgresCqrs<Task>>;
 
 #[async_trait::async_trait]
 impl state::CreatedFromState for PostgresTaskRepository {
@@ -51,7 +52,7 @@ impl state::CreatedFromState for CQRSFramework {
         let query = state.get::<Box<TaskQuery<PostgresTaskRepository>>>().await;
         let services = state.get::<TaskServices>().await;
 
-        Arc::new(postgres_es::postgres_aggregate_cqrs(
+        Rc::new(postgres_es::postgres_aggregate_cqrs(
             pool,
             vec![query],
             services,
