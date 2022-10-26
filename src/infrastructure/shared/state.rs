@@ -43,15 +43,6 @@ impl State {
     }
 }
 
-impl Clone for State {
-    fn clone(&self) -> Self {
-        Self {
-            settings: self.settings.clone(),
-            map: AHashMap::new(),
-        }
-    }
-}
-
 #[async_trait::async_trait]
 pub trait CreatedFromState: Clone + Send + Sync {
     async fn create(state: &mut State) -> Self;
