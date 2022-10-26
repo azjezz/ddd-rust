@@ -22,7 +22,7 @@ pub async fn index(
     tera: Service<Tera>,
     repository: Service<PostgresTaskRepository>,
 ) -> Result<impl Responder, ResponseError> {
-    let tasks = repository.0.load_all().await?;
+    let tasks = repository.load_all().await?;
     let content = macros::render!(tera, "index.html", { "tasks": tasks });
 
     Ok(HttpResponseBuilder::new(StatusCode::OK)
@@ -35,13 +35,12 @@ pub async fn create(
     input: Form<CreateTask>,
     metadata: Metadata,
 ) -> Result<impl Responder, ResponseError> {
-    cqrs.0
-        .execute_with_metadata(
-            &Uuid::new_v4().to_string(),
-            TaskCommand::create(input.content.clone()),
-            metadata.0,
-        )
-        .await?;
+    cqrs.execute_with_metadata(
+        &Uuid::new_v4().to_string(),
+        TaskCommand::create(input.content.clone()),
+        metadata.into(),
+    )
+    .await?;
 
     Ok(HttpResponseBuilder::new(StatusCode::FOUND)
         .append_header(("Location", "/"))
@@ -53,9 +52,12 @@ pub async fn finish(
     id: Path<String>,
     metadata: Metadata,
 ) -> Result<impl Responder, ResponseError> {
-    cqrs.0
-        .execute_with_metadata(&id.into_inner().clone(), TaskCommand::Finish, metadata.0)
-        .await?;
+    cqrs.execute_with_metadata(
+        &id.into_inner().clone(),
+        TaskCommand::Finish,
+        metadata.into(),
+    )
+    .await?;
 
     Ok(HttpResponseBuilder::new(StatusCode::FOUND)
         .append_header(("Location", "/"))
@@ -67,9 +69,12 @@ pub async fn delete(
     id: Path<String>,
     metadata: Metadata,
 ) -> Result<impl Responder, ResponseError> {
-    cqrs.0
-        .execute_with_metadata(&id.into_inner().clone(), TaskCommand::Delete, metadata.0)
-        .await?;
+    cqrs.execute_with_metadata(
+        &id.into_inner().clone(),
+        TaskCommand::Delete,
+        metadata.into(),
+    )
+    .await?;
 
     Ok(HttpResponseBuilder::new(StatusCode::FOUND)
         .append_header(("Location", "/"))

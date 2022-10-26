@@ -4,6 +4,7 @@ use actix_web::web::Data;
 use actix_web::Error;
 use actix_web::FromRequest;
 use std::future::Future;
+use std::ops::Deref;
 use std::pin::Pin;
 use tokio::sync::Mutex;
 
@@ -29,5 +30,13 @@ impl<T: CreatedFromState + 'static> FromRequest for Service<T> {
 
             Ok(Service::new(service))
         })
+    }
+}
+
+impl<T: CreatedFromState + ?Sized + 'static> Deref for Service<T> {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        &self.0
     }
 }

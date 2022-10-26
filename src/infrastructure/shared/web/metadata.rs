@@ -6,6 +6,12 @@ use std::future::Ready;
 
 pub struct Metadata(pub HashMap<String, String>);
 
+impl From<Metadata> for HashMap<String, String> {
+    fn from(metadata: Metadata) -> Self {
+        metadata.0
+    }
+}
+
 impl FromRequest for Metadata {
     type Error = Error;
     type Future = Ready<Result<Self, Error>>;
