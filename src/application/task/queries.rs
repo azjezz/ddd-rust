@@ -1,4 +1,4 @@
-use crate::application::shared::query::StandardQuery;
+use crate::application::shared::quries::StandardQuery;
 use crate::domain::task::aggregate::Task;
 use crate::domain::task::view::TaskView;
 

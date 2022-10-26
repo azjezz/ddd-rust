@@ -1,1 +1,1 @@
-pub(in crate::application) mod query;
+pub(in crate::application) mod quries;
