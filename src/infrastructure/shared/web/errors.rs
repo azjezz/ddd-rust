@@ -1,4 +1,3 @@
-use std::fmt::Display;
 use actix_web::body::BoxBody;
 use actix_web::http::StatusCode;
 use actix_web::HttpResponse;
@@ -8,6 +7,7 @@ use cqrs_es::persist::PersistenceError;
 use cqrs_es::AggregateError;
 use serde_json::json;
 use std::error::Error;
+use std::fmt::Display;
 use tera::Error as TeraError;
 
 #[derive(Debug)]

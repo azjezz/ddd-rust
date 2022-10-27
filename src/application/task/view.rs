@@ -9,9 +9,10 @@ use cqrs_es::View;
 // The logic should be minimal here
 impl View<Task> for TaskView {
     fn update(&mut self, event: &EventEnvelope<Task>) {
+        self.id = Some(event.aggregate_id.to_string());
+
         match &event.payload {
             TaskEvent::Created { content, date } => {
-                self.id = Some(event.aggregate_id.to_string());
                 self.content = content.clone();
                 self.created_at = Some(*date);
             }

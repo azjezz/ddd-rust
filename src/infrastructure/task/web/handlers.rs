@@ -1,5 +1,5 @@
+use crate::application::task::commands::TaskCommand;
 use crate::domain::shared::repository::Repository;
-use crate::domain::task::commands::TaskCommand;
 use crate::infrastructure::shared::macros;
 use crate::infrastructure::shared::web::errors::ResponseError;
 use crate::infrastructure::shared::web::metadata::Metadata;

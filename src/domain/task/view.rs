@@ -7,12 +7,10 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct TaskView {
     pub id: Option<String>,
-
-    pub created_at: Option<DateTime<Utc>>,
-    pub finished_at: Option<DateTime<Utc>>,
-    pub deleted_at: Option<DateTime<Utc>>,
-
     pub content: String,
     pub is_finished: bool,
     pub is_deleted: bool,
+    pub created_at: Option<DateTime<Utc>>,
+    pub finished_at: Option<DateTime<Utc>>,
+    pub deleted_at: Option<DateTime<Utc>>,
 }
