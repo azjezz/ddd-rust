@@ -95,8 +95,9 @@ impl Repository<TaskView, Task> for PostgresTaskRepository {
 
         let mut result: Vec<TaskView> = Vec::new();
         for row in rows {
-            let view: TaskView = serde_json::from_value(row.get("payload"))?;
-            result.push(view);
+            result.push(
+                serde_json::from_value::<TaskView>(row.get("payload"))?
+            );
         }
 
         Ok(result)

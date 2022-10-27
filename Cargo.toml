@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 actix-web = { version = "4" }
 actix-settings = { version = "0.6.0" }
-tera = { version = "1" }
+tera = { version = "1", default-features = false }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = { version = "1.0" }
 env_logger = { version = "0.9.1" }
@@ -16,5 +16,5 @@ chrono = { version = "0.4.22" }
 cqrs-es = { version = "0.4.5" }
 postgres-es = { version = "0.4.5" }
 async-trait = { version = "0.1" }
-sqlx = { version = "0.6", features = [ "runtime-actix-rustls", "postgres", "uuid", "chrono", "json" ] }
-tokio = { version = "1.21.2", features = ["default", "sync"] }
+sqlx = { version = "0.6", features = [ "runtime-actix-rustls", "postgres"] }
+tokio = { version = "1.21.2", features = ["sync"] }
