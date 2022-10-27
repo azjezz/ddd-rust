@@ -10,7 +10,7 @@ use sqlx::{Pool, Postgres};
 use tera::Tera;
 
 #[async_trait::async_trait]
-impl<T: state::CreatedFromState + Clone + 'static> state::CreatedFromState for Box<T> {
+impl<T: state::CreatedFromState + Clone + Sync + 'static> state::CreatedFromState for Box<T> {
     async fn create(state: &mut state::State) -> Box<T> {
         let inner = state.get::<T>().await;
 

@@ -44,6 +44,6 @@ impl State {
 }
 
 #[async_trait::async_trait]
-pub trait CreatedFromState: Clone + Send + Sync {
+pub trait CreatedFromState: Clone {
     async fn create(state: &mut State) -> Self;
 }
